@@ -16,6 +16,7 @@ public class KeyboardHero  {
      */
     public static void main(String[] args) {
         KeyboardHeroFrame khf = new KeyboardHeroFrame();
+        khf.run();
     }
     
 }
