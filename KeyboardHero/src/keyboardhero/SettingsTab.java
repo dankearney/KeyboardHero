@@ -15,11 +15,11 @@ public class SettingsTab extends KeyboardHeroTab {
     
     public SettingsTab() {
         super();
+        this.tabName = "Settings";
     }
  
     @Override
     public void renderTabComponents() {
-        this.setTabName("Settings");
         JLabel label = new JLabel();
         label.setText(String.format("Welcome to %s", this.getTabName()) );
         this.add(label);

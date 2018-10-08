@@ -15,11 +15,11 @@ public class HighScoreTab extends KeyboardHeroTab {
     
     public HighScoreTab() {
         super();
+        this.tabName = "High Scores";
     }
  
     @Override
     public void renderTabComponents() {
-        this.setTabName("High Scores");
         JLabel label = new JLabel();
         label.setText(String.format("Welcome to %s", this.getTabName()) );
         this.add(label);

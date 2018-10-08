@@ -14,7 +14,7 @@ import javax.swing.JPanel;
  */
 abstract class KeyboardHeroTab extends JPanel {
     
-    private String tabName;
+    protected String tabName = "Tab Name";
     
     public KeyboardHeroTab() {
         super();

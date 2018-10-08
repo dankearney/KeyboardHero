@@ -15,14 +15,14 @@ public class GameplayTab extends KeyboardHeroTab {
     
     public GameplayTab() {
         super();
+        this.tabName = "Gameplay";
     }
  
     @Override
     public void renderTabComponents() {
-        this.setTabName("Gameplay");
         JLabel label = new JLabel();
         label.setText(String.format("Welcome to %s", this.getTabName()) );
-        this.add(label);
+        this.add(label);       
     }
     
 }
