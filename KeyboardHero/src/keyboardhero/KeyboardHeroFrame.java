@@ -5,13 +5,7 @@
  */
 package keyboardhero;
 
-import java.awt.Color;
-import java.awt.Font;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.border.BevelBorder;
 
 /**
  *
@@ -25,20 +19,29 @@ public class KeyboardHeroFrame extends JFrame {
     // Closing the window kills the application.
     public KeyboardHeroFrame() {
         super("Keyboard Hero");
+
+        // Add the tabs to the frame
         this.keyboardHeroTabbedPane = new KeyboardHeroTabbedPane();
         this.addTabbedPane();
+        
+        // Set the frame default 
         this.setFrameDefaults();
     }
    
-    
     // Makes the window visible
     public void run() {
         this.setVisible(true);
+        while (true) {
+            this.repaint();
+        }
     }
     
     // Set JFrame defaults
     private void setFrameDefaults() {
-        setSize(1200, 1000);
+        // Sets the size of the panel fixed
+        setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
+        
+        // Closing the frame kills the application
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
