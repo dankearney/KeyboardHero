@@ -14,7 +14,8 @@ public class Constants {
     public static final int WINDOW_WIDTH = 1200;
     public static final int WINDOW_HEIGHT = 1000;
     public static final int FRET_WIDTH = 150;
-    public static final int STRIKE_SLOP_DURATION = 250;
+    public static final int STRIKE_SLOP_DURATION = 150;
+    public static final int TIME_TO_FRET = 4200;
     
     
 }

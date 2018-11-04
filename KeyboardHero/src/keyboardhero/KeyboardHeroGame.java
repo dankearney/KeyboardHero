@@ -66,6 +66,11 @@ public class KeyboardHeroGame {
         return this.currentTimestamp;
     }
     
+    /// Getter for score
+    public int getScore() {
+        return this.score;
+    }
+    
     // Moves the game forward as many milliseconds as have passed
     public void step() {
         // Set initial currentTimestamp to current time in milliseconds
@@ -75,8 +80,12 @@ public class KeyboardHeroGame {
         // Set current timestamp
         this.currentTimestamp = (currentTime - this.initialTimestamp);
         
-        // Unstrum frets that have been strummed in the past
+        // Unstrike frets that have been sruck too far in the past
         this.unstrikeFrets();
+        
+        // Mark notes we missed as such
+        this.updateMissedNotes();
+        
     }
     
     // Add the 5 frets to the game
@@ -94,9 +103,41 @@ public class KeyboardHeroGame {
     
     // Unstrum frets that were strummed too long ago
     public void unstrikeFrets() {
+        // Frets stay "struck" for a little bit after striking them.
+        // This clears that state.
         for (Fret fret : this.getFrets()) {
             fret.unstrikeFret();
         }
+    }
+    
+    // Detects and annotates missed notes
+    public void updateMissedNotes() {
+        for (Note note : this.song.getNotes()) {
+            // If we already hit the note, skip it.
+            if (note.getNoteState() == NoteState.Hit || note.getNoteState() == NoteState.Missed) {
+                continue;
+            }
+            // If we haven't hit the note yet, if it rolled by, we missed it. 
+            if ((this.currentTimestamp - note.getTimestamp()) > Constants.TIME_TO_FRET ) {
+                note.setNoteState(NoteState.Missed);
+                this.missScoreDeduction();
+            }
+        }
+    }
+    
+    // increments the score by 20 when you hit a note
+    public void strikeScoreBoost() {
+        this.score += 20;
+    }
+    
+    // Decrement score by 10 when a note is missed
+    public void missScoreDeduction() {
+        this.score -= 50;
+    }
+    
+    // Decrement score by 10 when a strike doesn't lead to a hit
+    public void badStrikeScoreDeduction() {
+        this.score -= 50;
     }
     
 }

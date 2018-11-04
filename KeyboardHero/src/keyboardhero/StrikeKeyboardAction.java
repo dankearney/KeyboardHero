@@ -26,6 +26,10 @@ class StrikeKeyboardAction extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        
+        // keep track of whether or not this was a successful strike
+        boolean success = false;
+        
         for (Fret fret : this.game.getFrets()) {
             
             // First of all, strike the fret, if it's pressed.
@@ -48,12 +52,20 @@ class StrikeKeyboardAction extends AbstractAction {
                         // If the time difference is small, we've struck the note.
                         if (Math.abs(differential) < Constants.STRIKE_SLOP_DURATION) {
                             note.setNoteState(NoteState.Hit);
+                            this.game.strikeScoreBoost();
+                            success = true;
                             break;
                         }
                     }
                 }
             }
         }
+        
+        // If we didn't strike a fret, deduct the score
+        if (!success) {
+            this.game.badStrikeScoreDeduction();
+        }
+        
     }
 
 }

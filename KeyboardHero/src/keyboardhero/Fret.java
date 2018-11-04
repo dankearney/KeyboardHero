@@ -70,7 +70,7 @@ public class Fret implements Drawable {
         
         // Offset from center
         int offset_x = -20;
-        int offset_y = 790;
+        int offset_y = 785;
         
         // Set color of fret based on fret state 
         Color fretColor;
@@ -79,14 +79,14 @@ public class Fret implements Drawable {
                 fretColor = Color.white;
                 break;
             case Struck:
-                fretColor = Color.WHITE;
+                fretColor = Color.white;
                 height = 20;
                 width = 75;
                 offset_x = -15;
                 offset_y -= 10;
                 break;
             case Unpressed:
-                fretColor = Color.green;
+                fretColor = Color.black;
                 break;
             default:
                 fretColor = Color.white;

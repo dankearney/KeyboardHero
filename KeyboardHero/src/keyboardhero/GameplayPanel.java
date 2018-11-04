@@ -6,6 +6,7 @@
 package keyboardhero;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import javax.swing.ActionMap;
@@ -106,6 +107,11 @@ public class GameplayPanel extends JPanel {
         for ( Note note : this.game.getSong().getNotes() ) {
             note.draw(g, this.game);
         }
+        
+        // Draw score on top left
+        g.setFont(new Font("Arial", Font.BOLD, 40));
+        g.drawString(Integer.toString(this.game.getScore()), 50, 50);
+        
         
         // Iterate the game one step
         this.game.step();
