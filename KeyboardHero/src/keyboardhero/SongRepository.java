@@ -6,6 +6,7 @@
 package keyboardhero;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -21,17 +22,18 @@ public class SongRepository {
         // Set up test note list
         ArrayList<Note> notes = new ArrayList<Note>();
         
+        // Set up possible notes to choose from
+        KeyboardString[] kbs = new KeyboardString[] {
+            KeyboardString.A, KeyboardString.S, KeyboardString.D,
+            KeyboardString.F, KeyboardString.G
+        };
+        
         // Add a bunch of notes
-        notes.add(new Note(KeyboardString.A, 1000));
-        notes.add(new Note(KeyboardString.D, 2000));
-        notes.add(new Note(KeyboardString.C, 3000));
-        notes.add(new Note(KeyboardString.B, 4000));
-        notes.add(new Note(KeyboardString.A, 5000));
-        notes.add(new Note(KeyboardString.A, 6000));
-        notes.add(new Note(KeyboardString.E, 7000));
-        notes.add(new Note(KeyboardString.E, 8000));
-        notes.add(new Note(KeyboardString.B, 9000));
-        notes.add(new Note(KeyboardString.A, 10000));
+        for (int i = 1000; i < 100000; i += 1000 * Math.random() + 250) {
+            int rnd = new Random().nextInt(kbs.length);
+            notes.add(new Note(kbs[rnd], i));
+        }
+
 
         // Create the song with those notes
         return new Song(notes, name);

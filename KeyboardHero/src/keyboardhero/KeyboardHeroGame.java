@@ -72,7 +72,11 @@ public class KeyboardHeroGame {
         Date date = new Date();
         Long currentTime = date.getTime();
         
+        // Set current timestamp
         this.currentTimestamp = (currentTime - this.initialTimestamp);
+        
+        // Unstrum frets that have been strummed in the past
+        this.unstrikeFrets();
     }
     
     // Add the 5 frets to the game
@@ -86,6 +90,13 @@ public class KeyboardHeroGame {
     // Getter for list of frets
     public ArrayList<Fret> getFrets() {
         return this.frets;
+    }
+    
+    // Unstrum frets that were strummed too long ago
+    public void unstrikeFrets() {
+        for (Fret fret : this.getFrets()) {
+            fret.unstrikeFret();
+        }
     }
     
 }

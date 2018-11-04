@@ -5,7 +5,11 @@
  */
 package keyboardhero;
 
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.KeyStroke;
 
 /**
  *
@@ -26,13 +30,26 @@ public class KeyboardHeroFrame extends JFrame {
         
         // Set the frame default 
         this.setFrameDefaults();
+        
+        // Set keyboard event listeners
+//        KeyboardAction action = new KeyboardAction();
+//        
+//        InputMap inputMap = getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+//        ActionMap actionMap = getRootPane().getActionMap(); 
+//
+//        inputMap.put(KeyStroke.getKeyStroke("F2"), "f2Action");
+//        actionMap.put("f2Action", action);           
+        
     }
    
     // Makes the window visible
-    public void run() {
+    public void run() throws InterruptedException {
         this.setVisible(true);
         while (true) {
+            // Redraw the game
             this.repaint();
+            // pause a bit
+            Thread.sleep(10);
         }
     }
     

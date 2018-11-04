@@ -8,9 +8,9 @@ package keyboardhero;
 /**
  *
  * @author Dank
- * Possible strings for a note to be played on.
- * For simplicity, just call them A, B, C, D, and E
+ Possible strings for a note to be played on.
+ For simplicity, just call them A, S, D, F, and G
  */
 public enum KeyboardString {
-    A, B, C, D, E;
+    A, S, D, F, G;
 }

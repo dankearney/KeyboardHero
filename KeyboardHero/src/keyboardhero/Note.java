@@ -18,14 +18,14 @@ public class Note implements Drawable {
     // Keeps track of note's state 
     private NoteState noteState;
     
-    // which fret(s) are  the note on
-    private final KeyboardString fret;
+    // which keyboardString(s) are  the note on
+    private final KeyboardString keyboardString;
     
     // When is the note to be played (in milliseconds)
     private final int timestamp;
     
     public Note(KeyboardString fret, int timestamp) {
-        this.fret = fret;
+        this.keyboardString = fret;
         this.timestamp = timestamp;
         this.noteState = NoteState.Unplayed;
     }
@@ -43,8 +43,8 @@ public class Note implements Drawable {
         return this.timestamp;
     }
     
-    public KeyboardString getFret() {
-        return this.fret;
+    public KeyboardString getKeyboardString() {
+        return this.keyboardString;
     }
     
     // Draw the note on the given graphics object
@@ -52,26 +52,26 @@ public class Note implements Drawable {
     public void draw(Graphics g, KeyboardHeroGame game) {       
         
         // The y coordinate is the note's timestamp plus the game timestamp
-        int y = (int) (-this.getTimestamp() / 10 + game.getCurrentTimestamp() / 5);
+        int y = (int) ((-this.getTimestamp() + game.getCurrentTimestamp())) / 5 ;
         
-        // The x coordinate depends on the fret value
+        // The x coordinate depends on the keyboardString value
         int x = 0;
         
-        switch (this.getFret()) 
+        switch (this.getKeyboardString()) 
         {
             case A: 
                 x = 1 * Constants.FRET_WIDTH;
                 break;
-            case B: 
+            case S: 
                 x = 2 * Constants.FRET_WIDTH;
                 break;
-            case C: 
+            case D: 
                 x = 3 * Constants.FRET_WIDTH;
                 break;
-            case D: 
+            case F: 
                 x = 4 * Constants.FRET_WIDTH;
                 break;
-            case E: 
+            case G: 
                 x = 5 * Constants.FRET_WIDTH;
                 break;
             default: {
@@ -91,7 +91,7 @@ public class Note implements Drawable {
                 noteColor = Color.red;
                 break;
             case Hit:
-                noteColor = Color.green;
+                noteColor = Color.white;
                 break;
             default:
                 noteColor = Color.black;

@@ -8,8 +8,12 @@ package keyboardhero;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 /**
  *
@@ -45,6 +49,7 @@ public class GameplayTab extends KeyboardHeroTab {
         // Add panels to left (West) and right (East) sides of the tab
         this.add(controlPanel, BorderLayout.WEST);
         this.add(gameplayPanel, BorderLayout.EAST);
+        
     }
     
     // Getters and setters for gameplay
