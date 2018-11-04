@@ -6,6 +6,7 @@
 package keyboardhero;
 
 import java.awt.event.ActionEvent;
+import java.util.Date;
 import javax.swing.AbstractAction;
 
 /**
@@ -27,6 +28,8 @@ class FretKeyboardAction extends AbstractAction {
     public void actionPerformed(ActionEvent e) {
         if (this.pressed) {
             this.fret.pressFret();
+            Date date = new Date();
+            System.out.printf("Note: %s\tTimestamp: %d\r\n", e.getActionCommand(), 1541306700751L - date.getTime());
         } 
         else
         {
