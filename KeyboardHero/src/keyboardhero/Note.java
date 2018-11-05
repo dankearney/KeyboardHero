@@ -51,8 +51,19 @@ public class Note implements Drawable {
     @Override
     public void draw(Graphics g, KeyboardHeroGame game) {       
         
-        // The y coordinate is the note's timestamp plus the game timestamp
-        int y = (int) ((-this.getTimestamp() + game.getCurrentTimestamp())) / 5 ;
+        // Initially, position the note at its timestamp, so
+        // that later notes are higher on page
+        int y = -this.getTimestamp();
+        
+        // Now, adjust the position by the current game time so that
+        // as time passes, notes move down the screen
+        y += game.getCurrentTimestamp();
+        
+        // Convert milliseconds to pixels
+        y /= 5;
+        
+        /// Now offset the 0 position so that t=0 is where the frets are
+        y += 790;
         
         // The x coordinate depends on the keyboardString value
         int x = 0;

@@ -32,9 +32,12 @@ public class SongRepository {
             };
 
             // Add a bunch of notes
-            for (int i = 1000; i < 100000; i += 1000 * Math.random() + 250) {
+            for (int i = 2000; i < 100000; i += 1000) {
                 int rnd = new Random().nextInt(kbs.length);
                 notes.add(new Note(kbs[rnd], i));
+                if (new Random().nextInt(2) >= 1) {
+                    notes.add(new Note(kbs[(rnd + new Random().nextInt(kbs.length)) % 5], i));
+                }
             }
 
             // Create the song with those notes

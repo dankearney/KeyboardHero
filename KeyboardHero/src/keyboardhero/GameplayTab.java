@@ -31,7 +31,7 @@ public class GameplayTab extends KeyboardHeroTab {
         this.tabName = "Gameplay";      
         
         // Create a game
-        Song song = SongRepository.getSong("Titanium");
+        Song song = SongRepository.getSong("Random");
         this.game = new KeyboardHeroGame(song);
 
     }

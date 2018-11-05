@@ -117,8 +117,8 @@ public class KeyboardHeroGame {
             if (note.getNoteState() == NoteState.Hit || note.getNoteState() == NoteState.Missed) {
                 continue;
             }
-            // If we haven't hit the note yet, if it rolled by, we missed it. 
-            if ((this.currentTimestamp - note.getTimestamp()) > Constants.TIME_TO_FRET ) {
+            // If we haven't hit the note after teh slop period, we missed it
+            if ((this.currentTimestamp - note.getTimestamp()) > Constants.STRIKE_SLOP_DURATION / 2 ) {
                 note.setNoteState(NoteState.Missed);
                 this.missScoreDeduction();
             }

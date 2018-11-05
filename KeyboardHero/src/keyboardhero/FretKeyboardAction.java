@@ -29,7 +29,6 @@ class FretKeyboardAction extends AbstractAction {
         if (this.pressed) {
             this.fret.pressFret();
             Date date = new Date();
-            System.out.printf("Note: %s\tTimestamp: %d\r\n", e.getActionCommand(), 1541306700751L - date.getTime());
         } 
         else
         {

@@ -46,9 +46,7 @@ class StrikeKeyboardAction extends AbstractAction {
 
                         // Compute the time difference between the strike and the note
                         int differential = (int) (note.getTimestamp() - this.game.getCurrentTimestamp());
-                        
-                        differential += 4000;
-                        
+                                               
                         // If the time difference is small, we've struck the note.
                         if (Math.abs(differential) < Constants.STRIKE_SLOP_DURATION) {
                             note.setNoteState(NoteState.Hit);
