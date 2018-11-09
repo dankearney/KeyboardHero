@@ -30,15 +30,7 @@ public class KeyboardHeroFrame extends JFrame {
         
         // Set the frame default 
         this.setFrameDefaults();
-        
-        // Set keyboard event listeners
-//        KeyboardAction action = new KeyboardAction();
-//        
-//        InputMap inputMap = getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-//        ActionMap actionMap = getRootPane().getActionMap(); 
-//
-//        inputMap.put(KeyStroke.getKeyStroke("F2"), "f2Action");
-//        actionMap.put("f2Action", action);           
+             
         
     }
    
@@ -48,8 +40,6 @@ public class KeyboardHeroFrame extends JFrame {
         while (true) {
             // Redraw the game
             this.repaint();
-            // pause a bit
-            Thread.sleep(10);
         }
     }
     

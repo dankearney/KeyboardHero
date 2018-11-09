@@ -5,6 +5,7 @@
  */
 package keyboardhero;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -37,6 +38,7 @@ public class GameplayPanel extends JPanel {
         );
         this.setPreferredSize(gpDimension);
         
+        // Attach click logic
         this.setKeyBindings();
         
     }
@@ -57,7 +59,7 @@ public class GameplayPanel extends JPanel {
             String pressActionStr = "pressed" + fretStr;
             String unpressActionStr = "unpressed" + fretStr;
             
-            // Determine correct keyboard letter
+            // Determine correct keyboard letter to make to the key events
             int k = -1;
             switch (fret.getKeyboardString()) {
                 case A:
@@ -90,7 +92,7 @@ public class GameplayPanel extends JPanel {
         
         // Create a unique action string for the fret 
         String strikeActionStr = "struck";
-        KeyStroke struck = KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0, true);
+        KeyStroke struck = KeyStroke.getKeyStroke(KeyEvent.VK_L, 0, false);
         inMap.put(struck, strikeActionStr);
         actMap.put(strikeActionStr, new StrikeKeyboardAction(game));
     }
@@ -98,23 +100,47 @@ public class GameplayPanel extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
 
-        // Draw the frets
-        for ( Fret fret : this.game.getFrets() ) {
-            fret.draw(g, game);
+        // If the game is dormant, just draw something simple.
+        if (this.game.isDormant()) {
+            // Draw score on top left
+            g.setFont(new Font("Arial", Font.BOLD, 40));
+            
+            String text = "Select a song to begin.";
+            g.drawString(text, 250, 450);
         }
         
-        // Draw each note
-        for ( Note note : this.game.getSong().getNotes() ) {
-            note.draw(g, this.game);
+        // Draw the game in gameplay mode.
+        else if (this.game.isPlaying()) 
+        {
+            // Draw the frets
+            for ( Fret fret : this.game.getFrets() ) {
+                fret.draw(g, game);
+            }
+
+            // Draw each note
+            for ( Note note : this.game.getSong().getNotes() ) {
+                note.draw(g, this.game);
+            }
+
+            // Draw score on top left
+            g.setColor(Color.black);
+            g.setFont(new Font("Arial", Font.BOLD, 40));
+            g.drawString(Integer.toString(this.game.getScore()), 50, 50);
+
+
+            // Iterate the game one step
+            this.game.step();
         }
         
-        // Draw score on top left
-        g.setFont(new Font("Arial", Font.BOLD, 40));
-        g.drawString(Integer.toString(this.game.getScore()), 50, 50);
-        
-        
-        // Iterate the game one step
-        this.game.step();
-        
+        // Draw the game completed UI
+        else if (this.game.isComplete()) 
+        {
+            // Draw score on top left
+            g.setFont(new Font("Arial", Font.BOLD, 40));
+            
+            String text = "Song complete! Your score: " + Integer.toString(this.game.getScore());
+            g.drawString(text, 150, 400);
+    
+        }
     }
 }

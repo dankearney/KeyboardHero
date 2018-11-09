@@ -31,8 +31,7 @@ public class GameplayTab extends KeyboardHeroTab {
         this.tabName = "Gameplay";      
         
         // Create a game
-        Song song = SongRepository.getSong("Random");
-        this.game = new KeyboardHeroGame(song);
+        this.game = new KeyboardHeroGame();
 
     }
  
@@ -43,8 +42,8 @@ public class GameplayTab extends KeyboardHeroTab {
         this.setLayout(new BorderLayout());       
         
         // Create panels for gameplay control and gameplay itself
-        GameplayControlPanel controlPanel = new GameplayControlPanel();
-        GameplayPanel gameplayPanel = new GameplayPanel(this.getGame());
+        GameplayControlPanel controlPanel = new GameplayControlPanel(this.game);
+        GameplayPanel gameplayPanel = new GameplayPanel(this.game);
         
         // Add panels to left (West) and right (East) sides of the tab
         this.add(controlPanel, BorderLayout.WEST);

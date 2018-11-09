@@ -13,14 +13,15 @@ import javax.swing.JTabbedPane;
  */
 public class KeyboardHeroTabbedPane extends JTabbedPane {
     
+    // The tabs in the UI
     private final KeyboardHeroTab[] keyboardHeroTabs;
     
     public KeyboardHeroTabbedPane() {
         super();
+        // add the three tabs to the frame
         keyboardHeroTabs = new KeyboardHeroTab[] {
             new GameplayTab(), 
             new HighScoreTab(), 
-            new SettingsTab() 
         };
         this.addAllTabs();
     }

@@ -70,7 +70,7 @@ public class Fret implements Drawable {
         
         // Offset from center
         int offset_x = -20;
-        int offset_y = 785;
+        int offset_y = 782;
         
         // Set color of fret based on fret state 
         Color fretColor;

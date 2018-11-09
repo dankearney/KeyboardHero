@@ -60,7 +60,7 @@ public class Note implements Drawable {
         y += game.getCurrentTimestamp();
         
         // Convert milliseconds to pixels
-        y /= 5;
+        y /= 3;
         
         /// Now offset the 0 position so that t=0 is where the frets are
         y += 790;

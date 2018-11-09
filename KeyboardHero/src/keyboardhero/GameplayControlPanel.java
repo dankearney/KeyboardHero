@@ -7,7 +7,13 @@ package keyboardhero;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.MouseListener;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JComboBox;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  *
@@ -16,15 +22,57 @@ import javax.swing.JPanel;
  */
 public class GameplayControlPanel extends JPanel {
     
-    public GameplayControlPanel() {
+    private KeyboardHeroGame game;
+    
+    public GameplayControlPanel(KeyboardHeroGame game) {
         super();
+        
+        // Attach game to control panel
+        this.game = game;
         
         // Set panel to be 1/4 the size of the window
         Dimension gpDimension = new Dimension(Constants.WINDOW_WIDTH * 1 / 4, Constants.WINDOW_HEIGHT);
         this.setPreferredSize(gpDimension);
-        this.setBackground(Color.yellow);
+        this.setBackground(Color.white);
         
-        // TODO: Add UI elements for controlling game
+        // Add a label and text box for a user to enter their name
+        JLabel label = new JLabel("Username");
+        JTextField input = new JTextField("name   ");
+        this.add(label);
+        this.add(input);        
+        
+        // Add a combo box for picking a song
+        JComboBox songPicker = new JComboBox();
+        
+        // Add references to our songs
+        for (String songName : Constants.SONG_NAMES) {
+            songPicker.addItem(songName);
+        }
+        
+        // Set the current song to the first item in the combo box
+        game.setSongName(songPicker.getItemAt(0).toString());
+        
+        // Add a listener to changing the dropdown menu
+        songPicker.addActionListener(new SongPickerListener(game));
+        
+        // Add the combo box to the frame
+        this.add(songPicker);
+        
+        // Add the play button
+        JButton playButton = new JButton("Start");
+                
+        // Set up click listener
+        playButton.addMouseListener(new PlayButtonClickListener(game));
+        this.add(playButton);
+        
+        // Add the play button
+        JButton stopButton = new JButton("Stop");
+                
+        // Set up click listener
+        stopButton.addMouseListener(new StopButtonClickListener(game));
+        this.add(stopButton);
+        
+        
     }
     
 }

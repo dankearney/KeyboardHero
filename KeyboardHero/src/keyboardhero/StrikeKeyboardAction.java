@@ -12,6 +12,8 @@ import javax.swing.AbstractAction;
 /**
  *
  * @author Dank
+ * Handles when a user strikes the keyboard strum button.
+ * Computes collisions with notes 
  */
 class StrikeKeyboardAction extends AbstractAction {
 
@@ -60,7 +62,7 @@ class StrikeKeyboardAction extends AbstractAction {
         }
         
         // If we didn't strike a fret, deduct the score
-        if (!success) {
+        if (!success && game.isPlaying()) {
             this.game.badStrikeScoreDeduction();
         }
         

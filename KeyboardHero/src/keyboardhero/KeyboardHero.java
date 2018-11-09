@@ -13,9 +13,14 @@ public class KeyboardHero  {
 
     /**
      * @param args the command line arguments
+     * Main entry point for the Keyboard Hero game.
+     * Instantiates the necessary UI frame which kicks off the game 
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        // Initialize the main UI frame
         KeyboardHeroFrame khf = new KeyboardHeroFrame();
+        
+        // Run the main UI frame
         khf.run();
     }
     

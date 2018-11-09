@@ -5,6 +5,9 @@
  */
 package keyboardhero;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 
 /**
@@ -20,8 +23,20 @@ public class HighScoreTab extends KeyboardHeroTab {
  
     @Override
     public void renderTabComponents() {
+        // Set up simple header
+        JLabel header = new JLabel("High Scores");
+        this.add(header);
+        
+        // Read high scores from file and append to the end
         JLabel label = new JLabel();
-        label.setText(String.format("Welcome to %s", this.getTabName()) );
+        String highScoreText = "";
+        try {
+            highScoreText = HighScoreReaderWriter.readHighScores();
+        } catch (IOException ex) {
+            System.out.println("Unable to read high scores");
+        }
+        label.setText(highScoreText);
+
         this.add(label);
     }
     

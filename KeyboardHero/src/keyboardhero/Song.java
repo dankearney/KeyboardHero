@@ -21,10 +21,14 @@ public class Song {
     // Name of song
     private final String name;
     
+    // Filename of song
+    private String fileName;
+    
     // Constructor for song takes a list of notes and a name
-    public Song(ArrayList<Note> notes, String name) {
+    public Song(ArrayList<Note> notes, String name, String fileName) {
         this.notes = notes;
         this.name = name;
+        this.fileName = fileName;
     }
     
     // Getter for list of notes
@@ -37,4 +41,8 @@ public class Song {
         return name;
     }
     
+    // Getter for file name
+    public String getFileName() {
+        return this.fileName;
+    }
 }
