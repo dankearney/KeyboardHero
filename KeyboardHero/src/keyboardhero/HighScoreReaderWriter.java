@@ -11,64 +11,75 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
  * @author Dank
+ * Helper class for reading and writing high scores to and from a CSV
  */
 public class HighScoreReaderWriter {
     
+    // Hard-code the file location of the CSV
+    private static final String fileName = ".\\scores.csv";
+    
     // Writes a high score
-    public static void writeHighScore(String username, String song, int score) throws IOException {
-        FileWriter f = new FileWriter(".\\scores.csv");
-        BufferedWriter buff = new BufferedWriter(f);
-        
-        try
-        {
-            buff.append(username + "    " + song + "    " + Integer.toString(score));
-        }
-        catch (Exception e)
-        {
-            System.out.println("Failed to write high score");
-        }
-        finally
-        {
-            buff.close();
-            f.close();
-        }
+    public static void writeHighScore(HighScore hs) throws IOException {
+        // Write high score to a static CSV
+        FileWriter f = new FileWriter(fileName, true);
+        BufferedWriter b = new BufferedWriter(f);
+        b.write(hs.toString());
+        b.close();
+        f.close(); 
     }
     
-    // Reads the high score
-    public static String readHighScores() throws FileNotFoundException, IOException {
-        FileReader f = new FileReader(".\\scores.csv");
-        BufferedReader buffReader = new BufferedReader(f);
-        String scores = "";
+    // Reads the high score from the CSV
+    public static ArrayList<HighScore> readHighScores() throws FileNotFoundException, IOException {
+
+        // List to store our high scores
+        ArrayList<HighScore> highScores = new ArrayList<>();
         
-        try
-        {
-            while (true)
-            {
-                String nextLine = buffReader.readLine();
-                if (nextLine == null || nextLine.length() == 0) {
-                    break;
-                }
-                else
-                {
-                    scores += nextLine;
-                }
+        // Attempt to read the high scores file.
+        try {
+            // Create a file reader
+            FileReader f = new FileReader(fileName);
+            BufferedReader buff = new BufferedReader(f);
+            
+            // Grab the first line of the file
+            String s = buff.readLine();
+            
+            // Read the high scores line by line
+            while (s != null) {
+                HighScore hs = deserialize(s);
+                highScores.add(hs);
+                s = buff.readLine();
             }
+        } catch (Exception e) {
+            System.out.println("Could not read high scores" + e.getMessage());
         }
-        catch (Exception e)
-        {
-            System.out.println("Failed to write high score");
+        highScores.sort(new HighScoreComparator());
+        return highScores;
+    }
+    
+    // Returns a string value
+    public static String readHighScoresString() throws IOException {
+        ArrayList<HighScore> highScores = readHighScores();
+        String hsString = "";
+        for (HighScore hs : highScores ) {
+            hsString += hs.toString();
         }
-        finally
-        {
-            buffReader.close();
-            f.close();
-        }
-        
-        return scores;
+        return hsString;
+    }
+    
+    // Converts a string to a High Score
+    public static HighScore deserialize(String s) {
+        String[] segments = s.split("\t");
+        return new HighScore(segments[0], segments[1], Integer.valueOf(segments[2]));
+    }
+    
+    public static void main(String[] args) throws IOException {
+        HighScore hs = new HighScore("Name", "Song", 100);
+        HighScoreReaderWriter.writeHighScore(hs);
     }
     
 }

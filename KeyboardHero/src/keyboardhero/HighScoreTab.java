@@ -5,10 +5,14 @@
  */
 package keyboardhero;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -23,21 +27,32 @@ public class HighScoreTab extends KeyboardHeroTab {
  
     @Override
     public void renderTabComponents() {
-        // Set up simple header
+        // Clear the UI
+        this.removeAll();
+        
+       // Set up simple header
         JLabel header = new JLabel("High Scores");
         this.add(header);
-        
+                
         // Read high scores from file and append to the end
-        JLabel label = new JLabel();
+        JTextArea textArea = new JTextArea();
+        textArea.setEditable(false);
+        
         String highScoreText = "";
         try {
-            highScoreText = HighScoreReaderWriter.readHighScores();
+            highScoreText = HighScoreReaderWriter.readHighScoresString();
         } catch (IOException ex) {
-            System.out.println("Unable to read high scores");
+            System.out.println("Could not read high scores");
         }
-        label.setText(highScoreText);
-
-        this.add(label);
+        textArea.setText(highScoreText);
+        
+        // ADd UI to refresh high scores
+        JButton highScoreRefreshButton = new JButton("Refresh");
+        
+        highScoreRefreshButton.addMouseListener(new HighScoreRefreshListener(this));
+        this.add(highScoreRefreshButton);
+        // Add the text!
+        this.add(textArea);
     }
     
 }

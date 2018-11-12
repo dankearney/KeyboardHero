@@ -92,9 +92,13 @@ public class Fret implements Drawable {
                 fretColor = Color.white;
         }
         
+        // Draw fret outline
+        g.setColor(Color.BLACK);
+        g.fillRoundRect(x - offset_x - 1, offset_y - 1, height + 2, width + 2, 25, 25);
+     
+        // Draw inner fret
         g.setColor(fretColor);
         g.fillRoundRect(x - offset_x, offset_y, height, width, 25, 25);
-        
         
     }
     

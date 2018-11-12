@@ -50,6 +50,9 @@ public class KeyboardHeroGame {
         // Initialize score at 0
         this.score = 0;
         
+        // Set username to the supplied username
+        this.username = "username";
+        
         // Initialize game state as dormant
         this.gameState = GameState.Dormant;
         
@@ -63,6 +66,10 @@ public class KeyboardHeroGame {
         // Set up frets
         this.initalizeFrets();
         
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     // Getter for song
@@ -122,7 +129,8 @@ public class KeyboardHeroGame {
         // Write the high score result to the file
         try
         {
-            HighScoreReaderWriter.writeHighScore(this.username, this.songName, this.score);
+            HighScore hs = new HighScore(this.username, this.songName, this.score);
+            HighScoreReaderWriter.writeHighScore(hs);
         }
         catch (IOException e)
         {
@@ -174,12 +182,12 @@ public class KeyboardHeroGame {
     
     // Decrement score by 10 when a note is missed
     public void missScoreDeduction() {
-        this.score -= 50;
+        this.score -= 10;
     }
     
     // Decrement score by 10 when a strike doesn't lead to a hit
     public void badStrikeScoreDeduction() {
-        this.score -= 50;
+        this.score -= 10;
     }
     
     // Returns if the game is dormant
@@ -215,7 +223,7 @@ public class KeyboardHeroGame {
         // Initialize music thread
         this.musicThread = new MusicThread(this);
         
-        // Play the music
+        // Play the music in a new thread
         musicThread.start();
         
     }
@@ -229,6 +237,11 @@ public class KeyboardHeroGame {
     // Sets the song name
     public void setSongName(String songName) {
         this.songName = songName;
+    }
+    
+    // Sets the username
+    public void setUsername(String username) {
+        this.username = username;
     }
     
 }

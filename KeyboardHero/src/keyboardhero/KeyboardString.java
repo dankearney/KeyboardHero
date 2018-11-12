@@ -5,6 +5,11 @@
  */
 package keyboardhero;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
+
 /**
  *
  * @author Dank
@@ -13,4 +18,24 @@ package keyboardhero;
  */
 public enum KeyboardString {
     A, S, D, F, G;
+
+    // Returns a random KeyboardString
+    public static KeyboardString random() {
+        // Select a random index
+        int index = new Random().nextInt(KeyboardString.values().length);
+        
+        // Get the value at that index
+        return KeyboardString.values()[index];
+    }
+    
+    // Returns multiple random KeyboardStrings
+    public static HashSet<KeyboardString> nRandom(int n) {
+        HashSet<KeyboardString> kbs = new HashSet<KeyboardString>();
+        while (kbs.size() < n) {
+            KeyboardString kb = random();
+            kbs.add(kb);
+        }
+        return kbs;
+    }
+    
 }

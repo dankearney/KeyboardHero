@@ -6,6 +6,7 @@
 package keyboardhero;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 
 /**
@@ -19,38 +20,70 @@ public class SongRepository {
     // Returns the song specified
     public static Song getSong(String name) {
 
-        // Set up test note list
+        // Set up the list to store the batch of notes in the song
         ArrayList<Note> notes = new ArrayList<Note>();
 
-            // Set up possible notes to choose from
-            KeyboardString[] kbs = new KeyboardString[] {
-                KeyboardString.A, KeyboardString.S, KeyboardString.D,
-                KeyboardString.F, KeyboardString.G
-            };
+        // Declare the filename where the song is stored
+        String fileName = "";
 
-            // Add a bunch of notes
-            for (int i = 0; i < 100; i += 1) {
-                int rnd = new Random().nextInt(kbs.length);
-                notes.add(new Note(kbs[rnd], i * 500));
-                if (new Random().nextInt(3) == 1) {
-                    notes.add(new Note(kbs[(rnd + new Random().nextInt(kbs.length)) % 5], i * 500));
-                }
+        // The speed of the notes
+        int speed = 1000;
+        
+        // Time at which first note begins
+        int beginningTime = 0;
+        
+        // Time when the song is over
+        int endTime = 0;
+        
+        switch (name) {
+            case "Easy: Cheap Thrills":
+                fileName = ".\\sia.wav";
+                speed = 450;
+                beginningTime = 1500;
+                endTime = 214_000;
+                break;
+            case "Medium: Under the Bridge":
+               fileName = ".\\under_the_bridge.wav";
+               speed = 500;
+               beginningTime = 1500;
+               endTime = 220_000;
+               break;
+            case "Hard: Harder, Better, Faster, Stronger":
+                fileName = ".\\daft_punk.wav";
+                speed = 475;
+                beginningTime = 6000;
+                endTime = 264_000;
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown song supplied: " + name);
+        }
+    
+
+        // Add the notes to be played!
+        for (int timestamp = beginningTime; timestamp < endTime; timestamp += speed) {
+
+            // Add notes to the song at random.
+            // Prefer single notes (75% of the time)
+            // Allow chords 20% of the time
+            // Allow no note 5% of the time
+            
+            int diceroll = new Random().nextInt(100);
+            int numNotes = 0;
+            if (diceroll < 75) {
+                numNotes = 1;
+            } else if (diceroll < 95) {
+                numNotes = 2;
+            }
+            
+            // Add the random notes
+            HashSet<KeyboardString> kbs = KeyboardString.nRandom(numNotes);
+            for (KeyboardString kb : kbs) {
+                notes.add(new Note(kb, timestamp));
             }
 
-            // Create the song with those notes
-            String fileName = "";
-            switch (name) {
-                case "Medium: Under the Bridge":
-                    fileName = ".\\under_the_bridge.wav";
-                    break;
-                case "Easy: Cheap Thrills":
-                    fileName = ".\\sia.wav";
-                    break;
-                case "Hard: Harder, Better, Faster, Stronger":
-                    fileName = ".\\daft_punk.wav";
-                    break;
-            }
-            return new Song(notes, name, fileName);
+        }
+      
+        return new Song(notes, name, fileName);
     }
 }
    

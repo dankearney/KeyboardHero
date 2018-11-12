@@ -90,29 +90,52 @@ public class Note implements Drawable {
             }
         }
         
-        // Note color depends on the state of the note
-        Color noteColor;
-        
+        // Draw the note, differently depending on its state
         switch (this.getNoteState()) 
         {
             case Unplayed:
-                noteColor = Color.blue;
+                drawUnplayedNote(g, x, y);
                 break;
             case Missed:
-                noteColor = Color.red;
+                drawMissedNote(g, x, y);
                 break;
             case Hit:
-                noteColor = Color.white;
+                drawHitNote(g, x, y);
                 break;
-            default:
-                noteColor = Color.black;
         }
+    }
+    
+    private void drawHitNote(Graphics g, int x, int y) {
+        // Set color of outline
+        g.setColor(Color.BLUE);
         
-        // Set fill color to the note's specified
-        g.setColor(noteColor);
+        // Draw a filled rectangle
+        g.fillRect(x - 11, y - 11, 72, 47);
         
-        // Draw an oval at the specified spot
-        g.fillOval(x, y, 50, 25);
+        // Set color of filled inside
+        g.setColor(Color.WHITE);
+        
+        // Draw a filled rectangle
+        g.fillRect(x - 10, y - 10, 70, 45);
+   
+    }
+    
+    private void drawUnplayedNote(Graphics g, int x, int y) {
+       // Set color 
+        g.setColor(Color.BLUE);
+        
+        // Draw a filled rectangle
+        g.fillRect(x, y, 50, 25);
+    }
+    
+    private void drawMissedNote(Graphics g, int x, int y) {
+        
+        // Set color to red
+        g.setColor(Color.RED);
+        
+        // Draw a filled rectangle
+        g.fillRect(x - 10, y - 10, 70, 45);
+        
     }
     
 }

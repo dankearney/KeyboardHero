@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 public class GameplayControlPanel extends JPanel {
     
     private KeyboardHeroGame game;
+    private JTextField usernameTextField;
     
     public GameplayControlPanel(KeyboardHeroGame game) {
         super();
@@ -36,10 +37,10 @@ public class GameplayControlPanel extends JPanel {
         this.setBackground(Color.white);
         
         // Add a label and text box for a user to enter their name
-        JLabel label = new JLabel("Username");
-        JTextField input = new JTextField("name   ");
-        this.add(label);
-        this.add(input);        
+        JLabel usernameLabel = new JLabel("Username: ");
+        usernameTextField = new JTextField(game.getUsername());
+        this.add(usernameLabel);
+        this.add(usernameTextField);        
         
         // Add a combo box for picking a song
         JComboBox songPicker = new JComboBox();
@@ -62,7 +63,7 @@ public class GameplayControlPanel extends JPanel {
         JButton playButton = new JButton("Start");
                 
         // Set up click listener
-        playButton.addMouseListener(new PlayButtonClickListener(game));
+        playButton.addMouseListener(new PlayButtonClickListener(game, this));
         this.add(playButton);
         
         // Add the play button
@@ -73,6 +74,10 @@ public class GameplayControlPanel extends JPanel {
         this.add(stopButton);
         
         
+    }
+
+    public String getUsernameLabelValue() {
+        return this.usernameTextField.getText();
     }
     
 }

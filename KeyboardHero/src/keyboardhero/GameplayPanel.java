@@ -125,7 +125,7 @@ public class GameplayPanel extends JPanel {
             // Draw score on top left
             g.setColor(Color.black);
             g.setFont(new Font("Arial", Font.BOLD, 40));
-            g.drawString(Integer.toString(this.game.getScore()), 50, 50);
+            g.drawString("Score: " + Integer.toString(this.game.getScore()), 50, 50);
 
 
             // Iterate the game one step
@@ -135,9 +135,8 @@ public class GameplayPanel extends JPanel {
         // Draw the game completed UI
         else if (this.game.isComplete()) 
         {
-            // Draw score on top left
+            // Draw score on top left in large font
             g.setFont(new Font("Arial", Font.BOLD, 40));
-            
             String text = "Song complete! Your score: " + Integer.toString(this.game.getScore());
             g.drawString(text, 150, 400);
     
