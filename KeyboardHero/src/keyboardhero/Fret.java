@@ -70,9 +70,10 @@ public class Fret implements Drawable {
         
         // Offset from center
         int offset_x = -20;
-        int offset_y = 782;
+        int offset_y = Constants.FRET_OFFSET_HEIGHT;
         
-        // Set color of fret based on fret state 
+        // Set color of fret based on fret state
+        // And set size based on state as well
         Color fretColor;
         switch (this.state) {
             case Pressed:
@@ -102,6 +103,7 @@ public class Fret implements Drawable {
         
     }
     
+    // Getter for the keyboard string the fret is on
     public KeyboardString getKeyboardString() {
         return this.keyboardString;
     }
@@ -116,10 +118,12 @@ public class Fret implements Drawable {
         this.state = FretState.Unpressed;
     }
     
+    // Returns if the fret is pressed
     public boolean isPressed() {
         return this.state == FretState.Pressed;
     }
     
+    // Returns if the fret is struck
     public boolean isStruck() {
         return this.state == FretState.Struck;
     }
@@ -143,6 +147,7 @@ public class Fret implements Drawable {
             return;
         }
         
+        // Allow the fret to remain struck for a the duration of the strike slop duration
         Date date = new Date();
         Long timestamp = date.getTime();
         

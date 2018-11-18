@@ -32,27 +32,27 @@ public class SongRepository {
         // Time at which first note begins
         int beginningTime = 0;
         
-        // Time when the song is over
-        int endTime = 0;
+        // Pixels per millisecond of note
+        int pixelsPerMilli = 0;
         
         switch (name) {
             case "Easy: Cheap Thrills":
                 fileName = ".\\sia.wav";
-                speed = 450;
+                speed = 900;
                 beginningTime = 1500;
-                endTime = 214_000;
+                pixelsPerMilli = 4;
                 break;
             case "Medium: Under the Bridge":
                fileName = ".\\under_the_bridge.wav";
-               speed = 500;
+               speed = 450;
                beginningTime = 1500;
-               endTime = 220_000;
+               pixelsPerMilli = 3;
                break;
             case "Hard: Harder, Better, Faster, Stronger":
                 fileName = ".\\daft_punk.wav";
-                speed = 475;
+                speed = 325;
                 beginningTime = 6000;
-                endTime = 264_000;
+                pixelsPerMilli = 2;
                 break;
             default:
                 throw new IllegalArgumentException("Unknown song supplied: " + name);
@@ -60,7 +60,7 @@ public class SongRepository {
     
 
         // Add the notes to be played!
-        for (int timestamp = beginningTime; timestamp < endTime; timestamp += speed) {
+        for (int timestamp = beginningTime; timestamp < Constants.SONG_LENGTH; timestamp += speed) {
 
             // Add notes to the song at random.
             // Prefer single notes (75% of the time)
@@ -83,7 +83,7 @@ public class SongRepository {
 
         }
       
-        return new Song(notes, name, fileName);
+        return new Song(notes, name, fileName, pixelsPerMilli);
     }
 }
    

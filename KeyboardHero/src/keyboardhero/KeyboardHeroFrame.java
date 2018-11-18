@@ -14,6 +14,8 @@ import javax.swing.KeyStroke;
 /**
  *
  * @author Dank
+ * Main UI frame of the Keyboard Hero Game
+ * Bascially just sets the window size and adds the tabs
  */
 public class KeyboardHeroFrame extends JFrame {
     

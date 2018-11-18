@@ -12,12 +12,17 @@ import javax.swing.AbstractAction;
 /**
  *
  * @author Dank
+ * An event handler for when the frets are struck.
  */
 class FretKeyboardAction extends AbstractAction {
 
+    // Fret that was struck
     private Fret fret;
+    
+    // is the fret pressed?
     private boolean pressed;
 
+    // Constructor
     public FretKeyboardAction(Fret fret, boolean pressed) {
         super();
         this.fret = fret;
@@ -25,11 +30,13 @@ class FretKeyboardAction extends AbstractAction {
     }
 
     @Override
+    // Handle the fret being pressed
     public void actionPerformed(ActionEvent e) {
+        // If the action is to press, press the fret
         if (this.pressed) {
             this.fret.pressFret();
-            Date date = new Date();
         } 
+        // If the action is to unpress, unpress
         else
         {
             this.fret.unpressFret();

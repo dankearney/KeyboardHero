@@ -63,23 +63,24 @@ public class HighScoreReaderWriter {
     
     // Returns a string value
     public static String readHighScoresString() throws IOException {
+        // Read the high scores
         ArrayList<HighScore> highScores = readHighScores();
+        
+        // Initialize output string
         String hsString = "";
+        
+        // Iterate through high scores, generating a printable string
+        // Readably!
         for (HighScore hs : highScores ) {
-            hsString += hs.toString();
+            hsString += hs.toPrettyString();
         }
         return hsString;
     }
     
-    // Converts a string to a High Score
+    // Converts a string to a High Score, assuming it's tab-separated
     public static HighScore deserialize(String s) {
         String[] segments = s.split("\t");
         return new HighScore(segments[0], segments[1], Integer.valueOf(segments[2]));
     }
-    
-    public static void main(String[] args) throws IOException {
-        HighScore hs = new HighScore("Name", "Song", 100);
-        HighScoreReaderWriter.writeHighScore(hs);
-    }
-    
+   
 }

@@ -13,8 +13,9 @@ import java.util.Set;
 /**
  *
  * @author Dank
- Possible strings for a note to be played on.
- For simplicity, just call them A, S, D, F, and G
+ * Possible strings for a note to be played on, or a fret to live on.
+ * For simplicity, just call them A, S, D, F, and G, which are the
+ * valid keys to use.
  */
 public enum KeyboardString {
     A, S, D, F, G;
@@ -30,7 +31,9 @@ public enum KeyboardString {
     
     // Returns multiple random KeyboardStrings
     public static HashSet<KeyboardString> nRandom(int n) {
+        // Ensure the N are distinct
         HashSet<KeyboardString> kbs = new HashSet<KeyboardString>();
+        // Iteratively try to add random notes to the ste
         while (kbs.size() < n) {
             KeyboardString kb = random();
             kbs.add(kb);

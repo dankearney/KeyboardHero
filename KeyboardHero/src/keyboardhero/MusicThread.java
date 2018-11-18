@@ -25,6 +25,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  *
  * @author Dank
  * This class plays a music file in a new thread.
+ * Reads the file name from the song
  */
 public class MusicThread extends Thread {
     
@@ -48,13 +49,14 @@ public class MusicThread extends Thread {
             clip.start();
             
             // If the game is currently being played, keep the thread alive
+            // Only check every 250 ms to save system resources
             while (this.game.isPlaying()) {
-                Thread.sleep(10);
+                Thread.sleep(250);
             }
             
             // If the game is not playing anymore, we can terminate the thread.
-            clip.close();
             clip.stop();
+            clip.close();
             
         } catch (Exception ex) {
             System.out.println("Error playing  music file: " + ex.getMessage());

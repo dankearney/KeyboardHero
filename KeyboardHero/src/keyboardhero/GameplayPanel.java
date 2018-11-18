@@ -99,7 +99,7 @@ public class GameplayPanel extends JPanel {
     
     @Override
     public void paintComponent(Graphics g) {
-
+        
         // If the game is dormant, just draw something simple.
         if (this.game.isDormant()) {
             // Draw score on top left
@@ -122,10 +122,17 @@ public class GameplayPanel extends JPanel {
                 note.draw(g, this.game);
             }
 
-            // Draw score on top left
+            // Draw score on top left with time remaining
+            int timeRemaining = (int) (Constants.SONG_LENGTH - game.getCurrentTimestamp()) / 1000;
+            String labelText = String.format(
+                    "Time remaning: %d    Score: %d", 
+                    timeRemaining, 
+                    this.game.getScore()
+            );
+            
             g.setColor(Color.black);
             g.setFont(new Font("Arial", Font.BOLD, 40));
-            g.drawString("Score: " + Integer.toString(this.game.getScore()), 50, 50);
+            g.drawString(labelText, 50, 50);
 
 
             // Iterate the game one step

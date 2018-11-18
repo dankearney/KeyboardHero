@@ -28,7 +28,7 @@ public class HighScoreRefreshListener implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent me) {
-        ht.renderTabComponents();
+        ht.initializeTabRendering();
     }
 
     @Override

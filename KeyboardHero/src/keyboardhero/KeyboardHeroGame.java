@@ -13,7 +13,8 @@ import java.util.Date;
  *
  * @author Dank
  * This class contains the information about a keyboard hero game,
- * including its notes, its score, its state, and other things required
+ * including its notes, its score, its state, and other things required to actually play the game.
+ * It maintains the state at each timestep.
  */
 public class KeyboardHeroGame {
     
@@ -29,7 +30,7 @@ public class KeyboardHeroGame {
     // The song to be played
     private Song song;
     
-    // Current currentTimestamp
+    // Current timestamp of the game
     private Long currentTimestamp;
     
     // Initial timestamp for computing relative timestamps
@@ -44,19 +45,19 @@ public class KeyboardHeroGame {
     // Thread for music
     private MusicThread musicThread;
     
-    // constructor for game takes a song to be played 
+    // constructor for game
     public KeyboardHeroGame() {
         
         // Initialize score at 0
         this.score = 0;
         
-        // Set username to the supplied username
+        // Default the username to a reasonable default
         this.username = "username";
         
         // Initialize game state as dormant
         this.gameState = GameState.Dormant;
         
-        // Set currentTimestamp to -3000 to give music time to catch up
+        // Set currentTimestamp to 0 because the game has not started
         this.currentTimestamp = 0L;
         
         // Set initial currentTimestamp to current time in milliseconds
@@ -68,6 +69,7 @@ public class KeyboardHeroGame {
         
     }
 
+    // Getter for username
     public String getUsername() {
         return username;
     }
@@ -89,14 +91,15 @@ public class KeyboardHeroGame {
     
     // Moves the game forward as many milliseconds as have passed
     public void step() {
-        // Set initial currentTimestamp to current time in milliseconds
+        // Get current time to compute the relative timestamp
         Date date = new Date();
         Long currentTime = date.getTime();
         
-        // Set current timestamp
+        // Set current timestamp as the difference between when teh game began
+        // and the current time
         this.currentTimestamp = (currentTime - this.initialTimestamp);
         
-        // Unstrike frets that have been sruck too far in the past
+        // Unstrike frets that have been sruck too far in the past to be active
         this.unstrikeFrets();
         
         // Mark notes we missed as such
@@ -113,11 +116,12 @@ public class KeyboardHeroGame {
     public boolean isGameComplete() {
         // Iterate through the notes and determine if the last note has passed
         for (Note note : this.song.getNotes()) {
+            // the game ends half a second after the last note
             if (this.currentTimestamp - 500 < note.getTimestamp()) {
                 return false;
             }
         }
-        // No? game still being played.
+        // All notes still in play? game still being played.
         return true;
     }
     
@@ -129,18 +133,21 @@ public class KeyboardHeroGame {
         // Write the high score result to the file
         try
         {
+            // Create the score
             HighScore hs = new HighScore(this.username, this.songName, this.score);
             HighScoreReaderWriter.writeHighScore(hs);
         }
         catch (IOException e)
         {
-            
+            // Don't worry about this case, it's okay to just fail
+            System.out.println("Unable to read high scores");
         }
     }
     
     // Add the 5 frets to the game
     public void initalizeFrets() {
         this.frets = new ArrayList<Fret>();
+        // Iterate through the string values and add one fret per string
         for (KeyboardString kbs : KeyboardString.values()) {
             frets.add(new Fret (kbs) );
         }
@@ -167,7 +174,7 @@ public class KeyboardHeroGame {
             if (note.getNoteState() == NoteState.Hit || note.getNoteState() == NoteState.Missed) {
                 continue;
             }
-            // If we haven't hit the note after teh slop period, we missed it
+            // If we haven't hit the note after the slop period, we missed it
             if ((this.currentTimestamp - note.getTimestamp()) > Constants.STRIKE_SLOP_DURATION  ) {
                 note.setNoteState(NoteState.Missed);
                 this.missScoreDeduction();

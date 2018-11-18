@@ -36,7 +36,7 @@ public class GameplayTab extends KeyboardHeroTab {
     }
  
     @Override
-    public void renderTabComponents() {
+    public void initializeTabRendering() {
         // Set up a two column layout
         // Start with a border layout
         this.setLayout(new BorderLayout());       

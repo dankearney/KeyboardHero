@@ -11,11 +11,11 @@ import java.awt.Graphics;
 /**
  *
  * @author Dank
- * A note to be played in Keyboard Hero
+ * A note to be played in Keyboard Hero.
  */
 public class Note implements Drawable {
     
-    // Keeps track of note's state 
+    // Keeps track of note's state (unplayed, hit, miss)
     private NoteState noteState;
     
     // which keyboardString(s) are  the note on
@@ -24,6 +24,7 @@ public class Note implements Drawable {
     // When is the note to be played (in milliseconds)
     private final int timestamp;
     
+    // Constructor    
     public Note(KeyboardString fret, int timestamp) {
         this.keyboardString = fret;
         this.timestamp = timestamp;
@@ -60,14 +61,15 @@ public class Note implements Drawable {
         y += game.getCurrentTimestamp();
         
         // Convert milliseconds to pixels
-        y /= 3;
+        y /= game.getSong().getPixelsPerMilli();
         
         /// Now offset the 0 position so that t=0 is where the frets are
-        y += 790;
+        y += Constants.FRET_OFFSET_HEIGHT;
         
         // The x coordinate depends on the keyboardString value
         int x = 0;
         
+        // Draw the x position depending on which fret it is
         switch (this.getKeyboardString()) 
         {
             case A: 
@@ -105,6 +107,7 @@ public class Note implements Drawable {
         }
     }
     
+    // Draw a note that was hit
     private void drawHitNote(Graphics g, int x, int y) {
         // Set color of outline
         g.setColor(Color.BLUE);
@@ -120,6 +123,7 @@ public class Note implements Drawable {
    
     }
     
+    // Draw a note taht was not played
     private void drawUnplayedNote(Graphics g, int x, int y) {
        // Set color 
         g.setColor(Color.BLUE);

@@ -8,7 +8,7 @@ package keyboardhero;
 /**
  *
  * @author Dank
- * Keeps track of a single high score record
+ * Represents a single completed game record
  */
 public class HighScore {
     
@@ -44,6 +44,11 @@ public class HighScore {
     // Returns as a tab-separated for easy writing as CSV
     public String toString() {
         return this.username + "\t" + this.songName + "\t" + Integer.toString(score) + "\r\n";
+    }
+    
+    // Returns as pretty string for printing
+    public String toPrettyString() {
+        return String.format("%-30s\t%-50s\t%-30d\r\n", this.username, this.songName, this.score);
     }
     
 }

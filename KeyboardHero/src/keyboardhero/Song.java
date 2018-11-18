@@ -24,11 +24,15 @@ public class Song {
     // Filename of song
     private String fileName;
     
+    // Speed of song (lower is faster)
+    private int pixelsPerMilli;
+    
     // Constructor for song takes a list of notes and a name
-    public Song(ArrayList<Note> notes, String name, String fileName) {
+    public Song(ArrayList<Note> notes, String name, String fileName, int pixelsPerMilli) {
         this.notes = notes;
         this.name = name;
         this.fileName = fileName;
+        this.pixelsPerMilli = pixelsPerMilli;
     }
     
     // Getter for list of notes
@@ -45,4 +49,10 @@ public class Song {
     public String getFileName() {
         return this.fileName;
     }
+    
+    // Getter for pixels per milli
+    public int getPixelsPerMilli() {
+        return this.pixelsPerMilli;
+    }
+    
 }

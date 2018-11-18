@@ -11,7 +11,7 @@ import java.awt.event.MouseListener;
 /**
  *
  * @author Dank
- * A class that handles starting the game.
+ * A class that handles stoppoing the bame
  */
 public class StopButtonClickListener implements MouseListener {
 
