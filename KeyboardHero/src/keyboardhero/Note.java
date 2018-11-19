@@ -73,19 +73,19 @@ public class Note implements Drawable {
         switch (this.getKeyboardString()) 
         {
             case A: 
-                x = 1 * Constants.FRET_WIDTH;
+                x = 1 * Constants.FRET_SPACING;
                 break;
             case S: 
-                x = 2 * Constants.FRET_WIDTH;
+                x = 2 * Constants.FRET_SPACING;
                 break;
             case D: 
-                x = 3 * Constants.FRET_WIDTH;
+                x = 3 * Constants.FRET_SPACING;
                 break;
             case F: 
-                x = 4 * Constants.FRET_WIDTH;
+                x = 4 * Constants.FRET_SPACING;
                 break;
             case G: 
-                x = 5 * Constants.FRET_WIDTH;
+                x = 5 * Constants.FRET_SPACING;
                 break;
             default: {
                 x = 0;
@@ -113,13 +113,13 @@ public class Note implements Drawable {
         g.setColor(Color.BLUE);
         
         // Draw a filled rectangle
-        g.fillRect(x - 11, y - 11, 72, 47);
+        g.fillRoundRect(x - 11, y - 11, 72, 47, 25, 25);
         
         // Set color of filled inside
         g.setColor(Color.WHITE);
         
         // Draw a filled rectangle
-        g.fillRect(x - 10, y - 10, 70, 45);
+        g.fillRoundRect(x - 10, y - 10, 70, 45, 25, 25);
    
     }
     
@@ -129,7 +129,7 @@ public class Note implements Drawable {
         g.setColor(Color.BLUE);
         
         // Draw a filled rectangle
-        g.fillRect(x, y, 50, 25);
+        g.fillRoundRect(x, y, 50, 25, 25, 25);
     }
     
     private void drawMissedNote(Graphics g, int x, int y) {
@@ -138,7 +138,7 @@ public class Note implements Drawable {
         g.setColor(Color.RED);
         
         // Draw a filled rectangle
-        g.fillRect(x - 10, y - 10, 70, 45);
+        g.fillRoundRect(x - 10, y - 10, 70, 45, 25, 25);
         
     }
     

@@ -23,7 +23,8 @@ import javax.swing.KeyStroke;
  */
 public class GameplayPanel extends JPanel {
     
-    private KeyboardHeroGame game;
+    // The relevant game object
+    private final KeyboardHeroGame game;
     
     // Constructor for the gameplay panel
     public GameplayPanel(KeyboardHeroGame game) {
@@ -34,7 +35,7 @@ public class GameplayPanel extends JPanel {
         
         // Set panel to be 3/4 the size of the window
         Dimension gpDimension = new Dimension(
-                Constants.WINDOW_WIDTH * 3 / 4, Constants.WINDOW_HEIGHT
+            Constants.WINDOW_WIDTH * 3 / 4, Constants.WINDOW_HEIGHT
         );
         this.setPreferredSize(gpDimension);
         
@@ -59,7 +60,7 @@ public class GameplayPanel extends JPanel {
             String pressActionStr = "pressed" + fretStr;
             String unpressActionStr = "unpressed" + fretStr;
             
-            // Determine correct keyboard letter to make to the key events
+            // Determine correct keyboard letter to map to the key events
             int k = -1;
             switch (fret.getKeyboardString()) {
                 case A:
@@ -112,6 +113,19 @@ public class GameplayPanel extends JPanel {
         // Draw the game in gameplay mode.
         else if (this.game.isPlaying()) 
         {
+            
+            // Draw the fret line
+            g.setColor(Color.black);
+            int height = 2;
+            int width = Constants.FRET_SPACING * (this.game.getFrets().size());
+            int x = 100;
+            int y = Constants.FRET_OFFSET_HEIGHT + Constants.BASE_FRET_HEIGHT / 2 - height / 2;
+            g.fillRect(x, y, width, height);
+            
+            // Draw helper text for fret line
+            g.setFont(new Font("Arial", Font.BOLD, 30));
+            g.drawString("L", x - 30, y + 10);
+            
             // Draw the frets
             for ( Fret fret : this.game.getFrets() ) {
                 fret.draw(g, game);
@@ -121,21 +135,19 @@ public class GameplayPanel extends JPanel {
             for ( Note note : this.game.getSong().getNotes() ) {
                 note.draw(g, this.game);
             }
-
+            
             // Draw score on top left with time remaining
             int timeRemaining = (int) (Constants.SONG_LENGTH - game.getCurrentTimestamp()) / 1000;
             String labelText = String.format(
-                    "Time remaning: %d    Score: %d", 
+                    "Time remaining: %d    Score: %d", 
                     timeRemaining, 
                     this.game.getScore()
             );
-            
             g.setColor(Color.black);
             g.setFont(new Font("Arial", Font.BOLD, 40));
             g.drawString(labelText, 50, 50);
 
-
-            // Iterate the game one step
+            // Iterate the game state forward one step
             this.game.step();
         }
         

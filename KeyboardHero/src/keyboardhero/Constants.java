@@ -17,7 +17,10 @@ public class Constants {
     public static final int WINDOW_HEIGHT = 1000;
     
     // Widht of a fret, and distance between strings
-    public static final int FRET_WIDTH = 150;
+    public static final int FRET_SPACING = 150;
+    
+    // Height of a base fret
+    public static final int BASE_FRET_HEIGHT = 50;
     
     // Amount of slop between when a note is supposed to be struck
     // And when we are allowed to
@@ -33,7 +36,7 @@ public class Constants {
     // Background color
     public static final String BACKGROUND_COLOR_RGB = "#f9f9f9";
     
-    // Song length
-    public static final int SONG_LENGTH = 60000; 
+    // Song length (30 seconds)
+    public static final int SONG_LENGTH = 30_000; 
     
 }

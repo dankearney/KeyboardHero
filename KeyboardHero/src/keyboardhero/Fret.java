@@ -6,6 +6,7 @@
 package keyboardhero;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.util.Date;
 
@@ -44,19 +45,19 @@ public class Fret implements Drawable {
         switch (this.keyboardString) 
         {
             case A: 
-                x = 1 * Constants.FRET_WIDTH;
+                x = 1 * Constants.FRET_SPACING;
                 break;
             case S: 
-                x = 2 * Constants.FRET_WIDTH;
+                x = 2 * Constants.FRET_SPACING;
                 break;
             case D: 
-                x = 3 * Constants.FRET_WIDTH;
+                x = 3 * Constants.FRET_SPACING;
                 break;
             case F: 
-                x = 4 * Constants.FRET_WIDTH;
+                x = 4 * Constants.FRET_SPACING;
                 break;
             case G: 
-                x = 5 * Constants.FRET_WIDTH;
+                x = 5 * Constants.FRET_SPACING;
                 break;
             default: {
                 x = 0;
@@ -65,8 +66,8 @@ public class Fret implements Drawable {
         }
         
         // height and width of the frets
-        int height = 10;
-        int width = 50;
+        int width = 10;
+        int height = Constants.BASE_FRET_HEIGHT;
         
         // Offset from center
         int offset_x = -20;
@@ -81,8 +82,8 @@ public class Fret implements Drawable {
                 break;
             case Struck:
                 fretColor = Color.white;
-                height = 20;
-                width = 75;
+                width = 20;
+                height = 75;
                 offset_x = -15;
                 offset_y -= 10;
                 break;
@@ -95,11 +96,16 @@ public class Fret implements Drawable {
         
         // Draw fret outline
         g.setColor(Color.BLACK);
-        g.fillRoundRect(x - offset_x - 1, offset_y - 1, height + 2, width + 2, 25, 25);
+        g.fillRoundRect(x - offset_x - 1, offset_y - 1, width + 2, height + 2, 25, 25);
      
         // Draw inner fret
         g.setColor(fretColor);
-        g.fillRoundRect(x - offset_x, offset_y, height, width, 25, 25);
+        g.fillRoundRect(x - offset_x, offset_y, width, height, 25, 25);
+        
+        // Draw helper text
+        g.setColor(Color.black);
+        g.setFont(new Font("Arial", Font.BOLD, 20));
+        g.drawString(getKeyboardString().toString(), x + 20, Constants.FRET_OFFSET_HEIGHT + 100);
         
     }
     
