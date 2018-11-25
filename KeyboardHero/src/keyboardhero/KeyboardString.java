@@ -33,7 +33,8 @@ public enum KeyboardString {
     public static HashSet<KeyboardString> nRandom(int n) {
         // Ensure the N are distinct
         HashSet<KeyboardString> kbs = new HashSet<KeyboardString>();
-        // Iteratively try to add random notes to the ste
+        // Iteratively try to add random notes to the set
+        // Ensuring we don't return until we have N different ones
         while (kbs.size() < n) {
             KeyboardString kb = random();
             kbs.add(kb);

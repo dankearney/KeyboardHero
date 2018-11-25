@@ -12,8 +12,9 @@ import javax.swing.AbstractAction;
 /**
  *
  * @author Dank
- * Handles when a user strikes the keyboard strum button.
- * Computes collisions with notes 
+ * Handles when a user strikes the keyboard strum button (L)
+ * Computes collisions with notes and adjusts the note and game state
+ * accordingly.
  */
 class StrikeKeyboardAction extends AbstractAction {
 
@@ -27,6 +28,7 @@ class StrikeKeyboardAction extends AbstractAction {
     }
 
     @Override
+    // Handles the strike button press
     public void actionPerformed(ActionEvent e) {
         
         // keep track of whether or not this was a successful strike
@@ -40,7 +42,9 @@ class StrikeKeyboardAction extends AbstractAction {
             // If the fret is struck, we may have a collision with a note!
             if (fret.isStruck())
             {
-                // Detect a collision with the notes.
+                // Detect a collision with the notes
+                // by brute-force checking to see if the current timestamp
+                // matches with the notes we're pressing
                 for (Note note : this.game.getSong().getNotes()) {
                     
                     // Only bother looking at your string.

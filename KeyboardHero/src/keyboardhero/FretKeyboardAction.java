@@ -12,7 +12,9 @@ import javax.swing.AbstractAction;
 /**
  *
  * @author Dank
- * An event handler for when the frets are struck.
+ * An event handler for when the buttons associated with each fret are pressed.
+ * Responsible for updating the state of each fret so that they are rendered
+ * differently 
  */
 class FretKeyboardAction extends AbstractAction {
 

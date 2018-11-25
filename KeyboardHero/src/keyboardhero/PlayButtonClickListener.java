@@ -11,11 +11,14 @@ import java.awt.event.MouseListener;
 /**
  *
  * @author Dank
- * A class that handles what happens when the "start" button is presssed
+ * A class that handles what happens when the "start" button is pressed
  */
 public class PlayButtonClickListener implements MouseListener {
 
+    // The game to start
     private KeyboardHeroGame game;
+    
+    // 
     private GameplayControlPanel gcp;
     
     // Constructor
@@ -28,6 +31,9 @@ public class PlayButtonClickListener implements MouseListener {
     @Override
     // Starts the game when the button is clicked
     public void mouseClicked(MouseEvent me) {
+        // If a game is running, stop it.
+        game.stop();
+        
         // Grab the username
         game.setUsername(gcp.getUsernameLabelValue());
         game.start();

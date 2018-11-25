@@ -12,7 +12,7 @@ import java.util.Random;
 /**
  *
  * @author Dank
- * This class returns fully formed songs with notes 
+ * This class returns fully formed songs with notes.
  * 
  */
 public class SongRepository {
@@ -21,7 +21,7 @@ public class SongRepository {
     public static Song getSong(String name) {
 
         // Set up the list to store the batch of notes in the song
-        ArrayList<Note> notes = new ArrayList<Note>();
+        ArrayList<Note> notes = new ArrayList<>();
 
         // Declare the filename where the song is stored
         String fileName = "";
@@ -35,6 +35,7 @@ public class SongRepository {
         // Pixels per millisecond of note
         int pixelsPerMilli = 0;
         
+        // Hard-code values for each song
         switch (name) {
             case "Easy: Cheap Thrills":
                 fileName = ".\\sia.wav";
@@ -66,7 +67,6 @@ public class SongRepository {
             // Prefer single notes (75% of the time)
             // Allow chords 20% of the time
             // Allow no note 5% of the time
-            
             int diceroll = new Random().nextInt(100);
             int numNotes = 0;
             if (diceroll < 75) {
@@ -83,6 +83,7 @@ public class SongRepository {
 
         }
       
+        // Construct the song and return it
         return new Song(notes, name, fileName, pixelsPerMilli);
     }
 }

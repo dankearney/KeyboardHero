@@ -17,6 +17,7 @@ import java.util.ArrayList;
  *
  * @author Dank
  * Helper class for reading and writing high scores to and from a CSV
+ * 
  */
 public class HighScoreReaderWriter {
     
@@ -29,6 +30,8 @@ public class HighScoreReaderWriter {
         FileWriter f = new FileWriter(fileName, true);
         BufferedWriter b = new BufferedWriter(f);
         b.write(hs.toString());
+        
+        // Close the writer
         b.close();
         f.close(); 
     }
@@ -48,20 +51,22 @@ public class HighScoreReaderWriter {
             // Grab the first line of the file
             String s = buff.readLine();
             
-            // Read the high scores line by line
+            // Read the high scores line by line and add them to the array list
             while (s != null) {
                 HighScore hs = deserialize(s);
                 highScores.add(hs);
                 s = buff.readLine();
             }
         } catch (Exception e) {
+            // Swallow exceptions but print a helpful message
             System.out.println("Could not read high scores" + e.getMessage());
         }
+        // Sort the high scores
         highScores.sort(new HighScoreComparator());
         return highScores;
     }
     
-    // Returns a string value
+    // Returns a string value for the high sscores
     public static String readHighScoresString() throws IOException {
         // Read the high scores
         ArrayList<HighScore> highScores = readHighScores();

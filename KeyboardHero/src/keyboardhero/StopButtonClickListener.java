@@ -11,10 +11,11 @@ import java.awt.event.MouseListener;
 /**
  *
  * @author Dank
- * A class that handles stoppoing the bame
+ * A class that handles stopping the game 
  */
 public class StopButtonClickListener implements MouseListener {
 
+    // Game to be played
     private KeyboardHeroGame game;
     
     // Constructor
@@ -24,6 +25,7 @@ public class StopButtonClickListener implements MouseListener {
     }
     
     @Override
+    // Stop the game when the button is pressed
     public void mouseClicked(MouseEvent me) {
         game.stop();
     }

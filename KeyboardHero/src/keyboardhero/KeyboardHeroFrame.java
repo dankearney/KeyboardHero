@@ -15,10 +15,11 @@ import javax.swing.KeyStroke;
  *
  * @author Dank
  * Main UI frame of the Keyboard Hero Game
- * Bascially just sets the window size and adds the tabs
+ * Bascially just sets the window size and adds the tabbed pane
  */
 public class KeyboardHeroFrame extends JFrame {
     
+    // Tabbed pane for keyboard hero
     private KeyboardHeroTabbedPane keyboardHeroTabbedPane;
     
     // Initializes a JFrame at 800x1000 px
@@ -36,9 +37,12 @@ public class KeyboardHeroFrame extends JFrame {
         
     }
    
-    // Makes the window visible
+    // Main code to run the game loop
     public void run() throws InterruptedException {
+        // Makes the gameplay tab visible
         this.setVisible(true);
+        
+        // In a loop, repaint the game
         while (true) {
             // Redraw the game
             this.repaint();

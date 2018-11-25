@@ -239,6 +239,11 @@ public class KeyboardHeroGame {
     public void stop() {
         // Mark the game as dormant
         this.gameState = GameState.Dormant;
+        
+        // Kill the music thread 
+        if (this.musicThread != null) {
+            this.musicThread.kill();
+        }
     }
     
     // Sets the song name

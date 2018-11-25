@@ -11,7 +11,9 @@ import java.util.ArrayList;
 /**
  *
  * @author Dank
- * A song is a collection of notes to be played
+ * A song is a collection of notes to be played and a name.
+ * Also has a reference to a file on disk where the audio file is
+ * and the speed that the notes should fly by
  */
 public class Song {
     

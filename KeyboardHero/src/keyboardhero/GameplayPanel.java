@@ -19,7 +19,9 @@ import javax.swing.KeyStroke;
 /**
  *
  * @author Dank
- * Main visualization of game
+ * Main visualization of game.
+ * This game draws the game based on its state (for example, notes that have 
+ * been hit or not hit) based on the game state and the current timestamp.
  */
 public class GameplayPanel extends JPanel {
     

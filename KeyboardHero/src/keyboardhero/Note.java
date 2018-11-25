@@ -12,6 +12,8 @@ import java.awt.Graphics;
  *
  * @author Dank
  * A note to be played in Keyboard Hero.
+ * Each note has a state, which string it's on,
+ * and at what moment in the song it's supposed to be played.
  */
 public class Note implements Drawable {
     
@@ -52,18 +54,20 @@ public class Note implements Drawable {
     @Override
     public void draw(Graphics g, KeyboardHeroGame game) {       
         
-        // Initially, position the note at its timestamp, so
-        // that later notes are higher on page
+        // Position the note at its starting timestamp
+        // So that a note at t=0 is at y=0
         int y = -this.getTimestamp();
         
         // Now, adjust the position by the current game time so that
         // as time passes, notes move down the screen
         y += game.getCurrentTimestamp();
         
-        // Convert milliseconds to pixels
+        // Convert milliseconds to pixels, so that the notes are spaced out
+        // appropriately
         y /= game.getSong().getPixelsPerMilli();
         
-        /// Now offset the 0 position so that t=0 is where the frets are
+        // Now offset the 0 position so that t=0 is where the frets are
+        // Not at actual y=0
         y += Constants.FRET_OFFSET_HEIGHT;
         
         // The x coordinate depends on the keyboardString value

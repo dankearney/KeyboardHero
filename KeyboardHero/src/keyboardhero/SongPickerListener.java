@@ -12,16 +12,21 @@ import javax.swing.JComboBox;
 /**
  *
  * @author Dank 
+ * This handles the change in state when a user switches songs from the 
+ * song dropdown menu
  */
 public class SongPickerListener implements ActionListener {
 
+    // Game state
     KeyboardHeroGame game;
     
+    // Constructor
     public SongPickerListener(KeyboardHeroGame game) {
         this.game = game;
     }
 
     @Override
+    // Handles when a user changes the state of the dropdown
     public void actionPerformed(ActionEvent ae) {
         // Get the value of the selected item, which is the song name
         String songName = (String) ((JComboBox) ae.getSource()).getSelectedItem();

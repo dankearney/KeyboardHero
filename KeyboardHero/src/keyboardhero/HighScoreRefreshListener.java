@@ -5,32 +5,33 @@
  */
 package keyboardhero;
 
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 /**
  *
  * @author Dank
+ * Handles the high score tab refreshing button press
  */
 public class HighScoreRefreshListener implements MouseListener {
 
     // The container tab
     private HighScoreTab ht;
     
+    // Constructor
     public HighScoreRefreshListener(HighScoreTab ht) {
         this.ht = ht;
     }
 
-
     @Override
+    // Handle the click of the high scroe refresh button
+    // By simply re-loading the high score tab.
+    // This will automaticall refresh the high screos
     public void mouseClicked(MouseEvent me) {
         ht.initializeTabRendering();
     }
 
+    // Below overrides are not imiplemented because we do not need them
     @Override
     public void mousePressed(MouseEvent me) {
     }

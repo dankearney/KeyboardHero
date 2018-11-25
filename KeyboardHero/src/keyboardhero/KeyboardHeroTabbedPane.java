@@ -10,13 +10,14 @@ import javax.swing.JTabbedPane;
 /**
  *
  * @author Dank
- * Container for the two tabs of the game (High Scores, and Gameplay)
+ * Container for a tab in the game (High Scores, and Gameplay)
  */
 public class KeyboardHeroTabbedPane extends JTabbedPane {
     
     // The tabs in the UI
     private final KeyboardHeroTab[] keyboardHeroTabs;
-    
+   
+    // Construcot
     public KeyboardHeroTabbedPane() {
         super();
         // add the two tabs to the frame

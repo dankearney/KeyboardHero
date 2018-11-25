@@ -16,7 +16,7 @@ public class Constants {
     public static final int WINDOW_WIDTH = 1200;
     public static final int WINDOW_HEIGHT = 1000;
     
-    // Widht of a fret, and distance between strings
+    // Width of a fret, and distance between strings
     public static final int FRET_SPACING = 150;
     
     // Height of a base fret
@@ -36,7 +36,7 @@ public class Constants {
     // Background color
     public static final String BACKGROUND_COLOR_RGB = "#f9f9f9";
     
-    // Song length (30 seconds)
-    public static final int SONG_LENGTH = 30_000; 
+    // Song length (45 seconds)
+    public static final int SONG_LENGTH = 45_000; 
     
 }

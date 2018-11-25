@@ -12,9 +12,12 @@ package keyboardhero;
  */
 public class HighScore {
     
+    // Member variables
     private String username;
     private String songName;
+    private int score;
 
+    
     // Getters and setters
     public String getSongName() {
         return songName;
@@ -31,10 +34,9 @@ public class HighScore {
     public void setScore(int score) {
         this.score = score;
     }
-    private int score;
     
     // A single high score record
-    // Requires three bits of data: user, song name, score they achieves.
+    // Requires three pieces of data: user, song name, score they achieved
     public HighScore(String username, String songName, int score) {
         this.username = username;
         this.songName = songName;
